@@ -15,7 +15,7 @@ function Article (opts) {
 
 Article.prototype.toHtml = function() {
   var $newArticle = $('article.template').clone();
-  $('$newArticle').removeClass('template');
+  $newArticle.removeClass('template');
   /* TODO: This cloned article is no longer a template,
   as it now has real data attached to it! We need to account
   for that before this current article gets rendered to our
@@ -23,8 +23,8 @@ Article.prototype.toHtml = function() {
 
   if (!this.publishedOn) $newArticle.addClass('draft');
   $newArticle.data('category', this.category);
-  $newArticle.find('address').text(this.author);
-  $newArticle.find('.template h1').text(this.title);
+  $newArticle.find('address a').text(this.author);
+  $newArticle.find('#articles h1:first').text(this.title);
   $newArticle.find('a').html(this.authorUrl);
   $newArticle.find('.article-body').text(this.body);
   $newArticle.find('time datetime').html(this.publishedOn);
@@ -52,6 +52,7 @@ rawData.sort(function(a,b) {
 rawData.forEach(function(articleObject) {
   // REVIEW: Take a look at this forEach method; This may be the first time we've seen it.
   articles.push(new Article(articleObject));
+  // console.log(articles);
 });
 
 articles.forEach(function(a) {
