@@ -23,10 +23,10 @@ Article.prototype.toHtml = function() {
 
   if (!this.publishedOn) $newArticle.addClass('draft');
   $newArticle.data('category', this.category);
-  $newArticle.find('address a').text(this.author);
-  $newArticle.find('#articles h1:first').text(this.title);
-  $newArticle.find('a').html(this.authorUrl);
-  $newArticle.find('.article-body').text(this.body);
+  $newArticle.find('address a').html(this.author);
+  $newArticle.find('#articles h1:first').html(this.title);
+  $newArticle.find('address a').attr('href', this.authorUrl);
+  $newArticle.find('.article-body').html(this.body);
   $newArticle.find('time datetime').html(this.publishedOn);
 
   /* TODO: Now use jQuery to fill in the rest of the current
